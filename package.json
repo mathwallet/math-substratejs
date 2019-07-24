@@ -1,0 +1,33 @@
+{
+  "name": "samples",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack --config webpack.config.js --progress --display-modules --colors --display-reason"
+  },
+  "keywords": [
+    "test"
+  ],
+  "author": "forrest",
+  "license": "ISC",
+  "dependencies": {
+    "@polkadot/api": "^0.81.1",
+    "@polkadot/dev": "^0.29.1",
+    "@polkadot/extension-dapp": "^0.4.1",
+    "@polkadot/keyring": "^0.93.1",
+    "@polkadot/util": "^0.93.1",
+    "@polkadot/util-crypto": "^0.93.1",
+    "@polkadot/wasm-crypto": "^0.11.1",
+    "webpack": "^4.35.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.0",
+    "@babel/plugin-transform-runtime": "^7.5.0",
+    "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.5.0",
+    "babel-loader": "^8.0.6",
+    "webpack-cli": "^3.3.6"
+  }
+}
