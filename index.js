@@ -16,7 +16,7 @@ class PolkadotWeb3JSSample {
 	 */
 	async login() {
 		if (!isWeb3Injected) {
-			throw new Error("Please install the MathWallet first");
+			throw new Error("Please install/unlock the MathWallet first");
 		}
 		// meta.source contains the name of the extension that provides this account
 		const allAccounts = await web3Accounts();
