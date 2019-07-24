@@ -5,10 +5,15 @@ import {
 	web3Enable,
 	web3FromAddress
 } from "@polkadot/extension-dapp";
-
+// Called before onload
 web3Enable("polkadot samples");
 // Samples
 class PolkadotWeb3JSSample {
+	/***
+	 * login
+	 * @return accounts [{"address":"5D2JMakX2CgtPPkiqUzdsK3Y41vD6HyNy8ZETUjhjRrZFTfG","meta":{"name":"cc1","source":"polkadot-js"}}]
+
+	 */
 	async login() {
 		if (!isWeb3Injected) {
 			throw new Error("Please install the MathWallet first");
@@ -23,6 +28,7 @@ class PolkadotWeb3JSSample {
 	 * @param from from
 	 * @param to to
 	 * @param amount amount
+	 * @return hash
 	 */
 	async transfer(from, to, amount) {
 		// Initialise the provider to connect to the local node
