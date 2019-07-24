@@ -1,35 +1,46 @@
 const { ApiPromise, WsProvider } = require('@polkadot/api');
+import {
+	isWeb3Injected,
+	web3Accounts,
+	web3Enable,
+	web3FromAddress
+} from "@polkadot/extension-dapp";
 
-let injector = null;
+web3Enable("polkadot samples");
 // Samples
 class PolkadotWeb3JSSample {
 	async login() {
-		if (!window.injectedWeb3 || !window.injectedWeb3['polkadot-js']) {
+		if (!isWeb3Injected) {
 			throw new Error("Please install the MathWallet first");
 		}
-		// Get Accounts and Injector
-		injector = await window.injectedWeb3['polkadot-js'].enable('math sample');
-		const accounts = await injector.accounts.get();
-
-		return accounts;
+		// meta.source contains the name of the extension that provides this account
+		const allAccounts = await web3Accounts();
+		return allAccounts;
 	}
 
 	/***
 	 * Transfer
-	 * @param fromAddress from
-	 * @param toAddress to
+	 * @param from from
+	 * @param to to
 	 * @param amount amount
 	 */
-	async transfer(fromAddress, toAddress, amount) {
+	async transfer(from, to, amount) {
 		// Initialise the provider to connect to the local node
 		const provider = new WsProvider('wss://poc3-rpc.polkadot.io');
 		// Create the API and wait until ready
 		const api = await ApiPromise.create(provider);
-		api.setSigner(injector.signer)
-		// Create a extrinsic
-		const hash = api.tx.balances.transfer(toAddress, amount).signAndSend(fromAddress);
-		// returns
-		return hash;
+		// finds an injector for an address
+		const injector = await web3FromAddress(from);
+
+		// sets the signer for the address on the @polkadot/api
+		api.setSigner(injector.signer);
+
+		// sign and send out transaction - notice here that the address of the account (as retrieved injected)
+		// is passed through as the param to the `signAndSend`, the API then calls the extension to present
+		// to the user and get it signed. Once completex, the api sends the tx + signature via the normal process
+		return api.tx.balances
+			.transfer(to, amount)
+			.signAndSend(from);
 	}
 }
 
