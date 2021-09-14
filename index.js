@@ -34,7 +34,7 @@ class PolkadotWeb3JSSample {
 
 		//////////////////////////// alexander  ////////////////////////////
 		// Initialise the provider to connect to the local node
-		const provider = new WsProvider('wss://alex.unfrastructure.io/public/ws');
+		const provider = new WsProvider('wss://rpc.polkadot.io');
 		// Create the API and wait until ready
 		const api = await ApiPromise.create({ provider });
 
