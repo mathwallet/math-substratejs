@@ -7,11 +7,6 @@ import {
 } from "@polkadot/extension-dapp";
 web3Enable('polkadot-js/apps');
 
-import { IdentityTypes } from 'edgeware-node-types/dist/identity';
-import { SignalingTypes } from 'edgeware-node-types/dist/signaling';
-import { TreasuryRewardTypes } from 'edgeware-node-types/dist/treasuryReward';
-import { VotingTypes } from 'edgeware-node-types/dist/voting';
-
 // Samples
 class PolkadotWeb3JSSample {
 	/***
@@ -42,21 +37,6 @@ class PolkadotWeb3JSSample {
 		const provider = new WsProvider('wss://alex.unfrastructure.io/public/ws');
 		// Create the API and wait until ready
 		const api = await ApiPromise.create({ provider });
-
-		//////////////////////////// alexander  ////////////////////////////
-
-		//////////////////////////// edgeware  ////////////////////////////
-		// const provider = new WsProvider('wss://mainnet1.edgewa.re');
-		// const api = await ApiPromise.create({
-		// 	provider,
-		// 	types: {
-		// 		...IdentityTypes,
-		// 		...SignalingTypes,
-		// 		...TreasuryRewardTypes,
-		// 		...VotingTypes,
-		// 	}
-		// });
-		//////////////////////////// edgeware end ////////////////////////////
 
 		// finds an injector for an address
 		const injector = await web3FromAddress(from);
